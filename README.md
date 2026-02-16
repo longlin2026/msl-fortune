@@ -1,6 +1,8 @@
-# MSL 琥珀光
+# 🐎 MSL 千里马运势签
 
-一个专为医药 MSL 打造的网站，包含小说《琥珀色的光》和 2026 马年运势签。
+专为医药 MSL 打造的 2026 马年运势抽签网站，包含精美动画和 30 支专属签文。
+
+🎋 **立即体验**：https://你的用户名.github.io/msl-fortune/fortune/
 
 ## 🌐 在线访问
 
@@ -93,11 +95,12 @@ git push -u origin main
 
 | 图片 | 用途 |
 |------|------|
-| 主封面图.png | 首页 Hero 区域展示 |
+| hero-horse.png | 首页 Hero 区域展示（金色飞马） |
+| draw-bg.png | 抽签页面背景（剪影马医生） |
 | mascot-horse.png | 签筒上方的千里马吉祥物 |
-| bg-texture.png | 背景纹理 |
+| bg-texture.png | 结果页面背景纹理 |
 | card-decoration.png | 签文卡片装饰 |
-| 分享图.png | 社交媒体分享预览 |
+| share-cover.png | 社交媒体分享预览 |
 
 ## 📝 本地预览
 
