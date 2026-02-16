@@ -44,31 +44,36 @@ const state = {
 };
 
 // ========== DOM 元素 ==========
-const elements = {
-    loadingScreen: document.getElementById('loadingScreen'),
-    particleCanvas: document.getElementById('particleCanvas'),
-    heroSection: document.getElementById('heroSection'),
-    drawSection: document.getElementById('drawSection'),
-    resultSection: document.getElementById('resultSection'),
-    startBtn: document.getElementById('startBtn'),
-    tubeContainer: document.getElementById('tubeContainer'),
-    tubeWrapper: document.getElementById('tubeWrapper'),
-    progressRing: document.getElementById('progressRing'),
-    ringFill: document.getElementById('ringFill'),
-    pressHint: document.getElementById('pressHint'),
-    resultCard: document.getElementById('resultCard'),
-    levelBadge: document.getElementById('levelBadge'),
-    fortuneNumber: document.getElementById('fortuneNumber'),
-    fortuneTitle: document.getElementById('fortuneTitle'),
-    fortuneContent: document.getElementById('fortuneContent'),
-    fortuneDetail: document.getElementById('fortuneDetail'),
-    luckMeter: document.getElementById('luckMeter'),
-    saveBtn: document.getElementById('saveBtn'),
-    againBtn: document.getElementById('againBtn'),
-    shareTip: document.getElementById('shareTip'),
-    generating: document.getElementById('generating'),
-    shareCanvas: document.getElementById('shareCanvas')
-};
+let elements = {};
+
+function initElements() {
+    elements = {
+        loadingScreen: document.getElementById('loadingScreen'),
+        particleCanvas: document.getElementById('particleCanvas'),
+        heroSection: document.getElementById('heroSection'),
+        drawSection: document.getElementById('drawSection'),
+        resultSection: document.getElementById('resultSection'),
+        startBtn: document.getElementById('startBtn'),
+        tubeContainer: document.getElementById('tubeContainer'),
+        tubeWrapper: document.getElementById('tubeWrapper'),
+        progressRing: document.getElementById('progressRing'),
+        ringFill: document.getElementById('ringFill'),
+        pressHint: document.getElementById('pressHint'),
+        resultCard: document.getElementById('resultCard'),
+        levelBadge: document.getElementById('levelBadge'),
+        fortuneNumber: document.getElementById('fortuneNumber'),
+        fortuneTitle: document.getElementById('fortuneTitle'),
+        fortuneContent: document.getElementById('fortuneContent'),
+        fortuneDetail: document.getElementById('fortuneDetail'),
+        luckMeter: document.getElementById('luckMeter'),
+        saveBtn: document.getElementById('saveBtn'),
+        againBtn: document.getElementById('againBtn'),
+        shareTip: document.getElementById('shareTip'),
+        generating: document.getElementById('generating'),
+        shareCanvas: document.getElementById('shareCanvas')
+    };
+    console.log('DOM元素初始化完成:', Object.keys(elements));
+}
 
 // ========== 粒子背景 ==========
 function initParticles() {
@@ -513,6 +518,21 @@ function drawCornerDecoration(ctx, x, y, size, flipX = false, flipY = false) {
 
 // ========== 初始化 ==========
 function init() {
+    console.log('🐎 初始化开始...');
+
+    // 先初始化DOM元素
+    initElements();
+
+    // 检查关键元素是否存在
+    if (!elements.startBtn) {
+        console.error('找不到开始按钮!');
+        return;
+    }
+    if (!elements.tubeContainer) {
+        console.error('找不到签筒!');
+        return;
+    }
+
     // 初始化粒子背景
     initParticles();
 
@@ -530,8 +550,12 @@ function init() {
     elements.tubeContainer.addEventListener('mouseleave', handlePressEnd);
 
     // 按钮事件
-    elements.againBtn.addEventListener('click', resetToDraw);
-    elements.saveBtn.addEventListener('click', generateShareImage);
+    if (elements.againBtn) {
+        elements.againBtn.addEventListener('click', resetToDraw);
+    }
+    if (elements.saveBtn) {
+        elements.saveBtn.addEventListener('click', generateShareImage);
+    }
 
     // 防止页面滚动
     document.addEventListener('touchmove', function(e) {
@@ -539,6 +563,8 @@ function init() {
             e.preventDefault();
         }
     }, { passive: false });
+
+    console.log('✅ 初始化完成!');
 
     console.log('🐎 MSL千里马运势签 - 华丽版已加载');
     console.log('✨ 共收录', fortunes.length, '支签文');
