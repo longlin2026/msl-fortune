@@ -184,7 +184,7 @@ body {
     position: absolute;
     inset: 0;
     background-color: #F9F1E8;
-    background-image: url('../assets/hero-horse.png');
+    background-image: url('./assets/hero-horse.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -434,7 +434,7 @@ body {
     position: absolute;
     inset: 0;
     background-color: #FDF8F3;
-    background-image: url('../assets/draw-bg.png');
+    background-image: url('./assets/draw-bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -837,7 +837,7 @@ body {
     position: fixed;
     inset: 0;
     background-color: #FDF8F3;
-    background-image: url('../assets/bg-texture.png');
+    background-image: url('./assets/bg-texture.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

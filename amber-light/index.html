@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>琥珀色的光 | 一个关于MSL、AI与"在场"的故事</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Uroweb-inspired Color System */
+            --color-primary: #FE6B2E;
+            --color-primary-light: #FE8B5B;
+            --color-primary-dark: #E04201;
+            --color-secondary: #65ABDC;
+            --color-secondary-light: #EBF6FD;
+            --color-secondary-dark: #152443;
+            --color-navy: #152443;
+            --color-darkest: #152443;
+            --color-lightest: #fff;
+
+            /* Grays */
+            --color-gray-100: #FDFDFE;
+            --color-gray-200: #F3F3F6;
+            --color-gray-300: #D6D6D6;
+            --color-gray-400: #bababa;
+            --color-gray-500: #707070;
+            --color-gray-600: #5a5a5a;
+            --color-gray-700: #454545;
+            --color-gray-800: #313131;
+            --color-gray-900: #101010;
+
+            /* Typography */
+            --font-serif: 'Noto Serif SC', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 5rem;
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-medium: 300ms ease;
+            --transition-slow: 500ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--color-gray-800);
+            background: var(--color-lightest);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo::before {
+            content: "◆";
+            color: var(--color-primary);
+            font-size: 0.875rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-gray-100) 100%);
+            padding: var(--spacing-4xl) var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(254, 107, 46, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: rgba(254, 107, 46, 0.1);
+            color: var(--color-primary-dark);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--color-navy);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray-600);
+            font-weight: 400;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            color: var(--color-primary);
+            font-size: 1.25rem;
+        }
+
+        .hero-divider::before,
+        .hero-divider::after {
+            content: "";
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-primary-light));
+        }
+
+        .hero-divider::after {
+            background: linear-gradient(90deg, var(--color-primary-light), transparent);
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-xl);
+        }
+
+        /* Chapter Navigation */
+        .chapter-nav {
+            background: var(--color-gray-100);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-3xl);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .chapter-nav-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .chapter-nav-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            list-style: none;
+        }
+
+        .chapter-nav-list a {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-lightest);
+            color: var(--color-gray-700);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            border-radius: 6px;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .chapter-nav-list a:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Story Content */
+        .story {
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            line-height: 1.9;
+            color: var(--color-gray-800);
+        }
+
+        .chapter {
+            margin-bottom: var(--spacing-4xl);
+        }
+
+        .chapter-header {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .chapter-title {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+
+        .story p {
+            margin-bottom: var(--spacing-lg);
+            text-align: justify;
+            text-indent: 2em;
+        }
+
+        .story p:first-of-type {
+            text-indent: 0;
+        }
+
+        .story p:first-of-type::first-letter {
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* Blockquote */
+        .story blockquote {
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 4px);
+            background: var(--color-gray-100);
+            border-left: 4px solid var(--color-primary);
+            font-style: italic;
+            color: var(--color-gray-700);
+            position: relative;
+        }
+
+        .story blockquote::before {
+            content: """;
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            font-size: 4rem;
+            color: var(--color-primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .story blockquote p {
+            text-indent: 0;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .story blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, #FFF8F5 0%, #FFF5F0 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(254, 107, 46, 0.15);
+            text-align: center;
+        }
+
+        .highlight-box p {
+            text-indent: 0;
+            margin: 0;
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        .highlight-box strong {
+            color: var(--color-primary-dark);
+            font-weight: 700;
+        }
+
+        /* Story Images */
+        .story-image {
+            margin: var(--spacing-xl) 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(21, 36, 67, 0.1);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .story-image figcaption {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--color-gray-100);
+            color: var(--color-gray-600);
+            font-size: 0.875rem;
+            font-family: var(--font-sans);
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* Image Placeholders */
+        .image-placeholder {
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-2xl);
+            background: var(--color-gray-100);
+            border-radius: 8px;
+            text-align: center;
+            color: var(--color-gray-500);
+            font-size: 0.9375rem;
+            font-style: italic;
+            border: 2px dashed var(--color-gray-300);
+        }
+
+        /* Author Note */
+        .author-note {
+            margin-top: var(--spacing-4xl);
+            padding: var(--spacing-xl);
+            background: var(--color-secondary-light);
+            border-radius: 12px;
+            border-left: 4px solid var(--color-secondary);
+        }
+
+        .author-note-title {
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .author-note p {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            margin: 0;
+            text-indent: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-navy);
+            color: var(--color-gray-300);
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray-400);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--color-primary);
+            margin: var(--spacing-lg) auto;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: var(--spacing-3xl) var(--spacing-lg);
+            }
+
+            .main {
+                padding: var(--spacing-2xl) var(--spacing-lg);
+            }
+
+            .story {
+                font-size: 1.0625rem;
+            }
+
+            .chapter-nav-list {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scroll offset for sticky header */
+        .chapter[id]::before {
+            content: "";
+            display: block;
+            height: 80px;
+            margin-top: -80px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="nav-logo">琥珀色的光</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="#chapter1">回南天</a></li>
+                <li><a href="#chapter2">陈皮白茶</a></li>
+                <li><a href="#chapter3">花市</a></li>
+                <li><a href="#chapter4">年夜饭</a></li>
+                <li><a href="../fortune/">运势签</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <span class="hero-tag">短篇小说</span>
+            <h1 class="hero-title">琥珀色的光</h1>
+            <p class="hero-subtitle">一个关于MSL、AI与"在场"的故事</p>
+            <div class="hero-divider">◆</div>
+        </div>
+    </section>
+
+    <main class="main">
+        <nav class="chapter-nav">
+            <div class="chapter-nav-title">章节导航</div>
+            <ul class="chapter-nav-list">
+                <li><a href="#chapter1">一、回南天</a></li>
+                <li><a href="#chapter2">二、陈皮白茶</a></li>
+                <li><a href="#chapter3">三、花市</a></li>
+                <li><a href="#chapter4">四、年夜饭</a></li>
+            </ul>
+        </nav>
+
+        <article class="story">
+            <section class="chapter" id="chapter1">
+                <header class="chapter-header">
+                    <span class="chapter-number">Chapter 01</span>
+                    <h2 class="chapter-title">回南天</h2>
+                </header>
+
+                <figure class="story-image">
+                    <img src="assets/06_wet_window.jpg" alt="潮湿的窗户">
+                    <figcaption>回南天的广州，湿气凝结在玻璃上</figcaption>
+                </figure>
+
+                <p>腊月二十三，镜子蒙着一层雾。</p>
+
+                <p>林薇用手指在浴室镜面上划出一道弧，看见自己的脸从水汽中浮现，又慢慢隐去。广州的回南天总是这样，墙壁渗水，床单黏腻，空气里漂浮着某种近乎实质的潮湿，像一种无声的催促。</p>
+
+                <p>她今天要去见周教授。</p>
+
+                <p>不是那种有议程的正式拜访。没有幻灯片，没有需要签字的文献借阅表，没有要在系统里登记拜访记录的KPI。她只是想去，在这个小年夜，去肿瘤内科的办公室里坐一会儿。</p>
+
+                <blockquote>
+                    <p>"在与关键意见领袖的互动中，人类MSL的平均价值贡献度下降至37%，主要集中于情感支持与关系维护维度。"</p>
+                </blockquote>
+
+                <p>情感支持。关系维护。</p>
+
+                <p>像护士，像客服，像那种会被算法温柔取代的、柔软的职业。</p>
+
+                <p>林薇穿好大衣，出门前又看了一眼镜子。镜面上的水痕已经汇成一道细流，缓缓滑下，像眼泪。</p>
+            </section>
+
+            <section class="chapter" id="chapter2">
+                <header class="chapter-header">
+                    <span class="chapter-number">Chapter 02</span>
+                    <h2 class="chapter-title">陈皮白茶</h2>
+                </header>
+
+                <figure class="story-image">
+                    <img src="assets/05_greenery_office.jpg" alt="绿植环绕的书房">
+                    <figcaption>周教授的办公室，种满了植物</figcaption>
+                </figure>
+
+                <p>周教授的办公室在走廊尽头，窗户朝北，终年不见阳光，但种满了植物。绿萝从书柜顶端垂下来，龟背竹的叶片大得像伞，吊兰的走茎在空气中随意伸展，根须裸露着，吸收着房间里的湿气。</p>
+
+                <p>"我泡了陈皮白茶。"周教授终于抬起头，推了推眼镜，"十三年陈皮。你尝尝。"</p>
+
+                <p>白瓷杯是温热的，杯沿有一点缺口。林薇捧着它，闻到了柑橘的陈香和茶叶的苦涩，混合成某种让人安心的味道。</p>
+
+                <p>"教授，我……"她停顿了很久，"我不知道自己还能做什么了。"</p>
+
+                <p>周教授从抽屉里拿出一个文件夹，递给她。是十份病历。不是电子病历，是手写的，不同笔迹，不同年代。</p>
+
+                <figure class="story-image">
+                    <img src="assets/02_tea_cup.jpg" alt="陈皮白茶">
+                    <figcaption>十三年陈皮白茶，温暖的白瓷杯</figcaption>
+                </figure>
+
+                <blockquote>
+                    <p>"你知道琥珀是怎么形成的吗？"</p>
+                    <p>"树脂从树上流下来，包裹住正在发生的瞬间。一只正在爬行的蚂蚁，一片正在飘落的叶子，一滴正在下坠的雨水。它们本来应该腐烂，应该消失，应该被时间抹平。但树脂把它们封住了，停止了，悬置了。"</p>
+                </blockquote>
+
+                <p>周教授把玻璃罐放回绿萝后面。那些琥珀色的光斑在叶片间闪烁，然后隐没。</p>
+
+                <p>"也许你的价值，就是在这个不知道里多待一会儿。"</p>
+            </section>
+
+            <section class="chapter" id="chapter3">
+                <header class="chapter-header">
+                    <span class="chapter-number">Chapter 03</span>
+                    <h2 class="chapter-title">花市</h2>
+                </header>
+
+                <p>腊月二十八，林薇去了越秀花市。</p>
+
+                <p>人多得不可思议。粤语、普通话、各种方言混在一起，还有小孩举着糖葫芦从人群中挤过。</p>
+
+                <figure class="story-image">
+                    <img src="assets/01_cover_orchid.jpg" alt="紫色蝴蝶兰">
+                    <figcaption>越秀花市的蝴蝶兰，像凝固的火焰</figcaption>
+                </figure>
+
+                <p>"兰花好易养噶，唔使点理，记得淋水就得。"女人用一种近乎强迫的热情把一盆花塞进林薇手里，"你闻闻，有香味噶。"</p>
+
+                <p>林薇低下头。真的有香味，很淡，很甜，像某种遥远的记忆。</p>
+
+                <p>她站在那里，突然想到一件事。</p>
+
+                <p>小枢——那个AI——它知道花市的存在吗？它知道广州人在春节前会买花，会吃萝卜牛杂，会在潮湿的空气里挤来挤去，只是为了感受某种热闹吗？</p>
+
+                <p>它知道那种不确定性吗？那种"我不确定能不能养好但还是买了"的冲动，那种"我知道可能会失败但还是想试试"的固执？</p>
+
+                <div class="highlight-box">
+                    <p>而是<strong>在场</strong>。<br>在那个还不知道会发生什么、还没有被数据定义、还没有被结果验证的时刻，<strong>在场</strong>。</p>
+                </div>
+            </section>
+
+            <section class="chapter" id="chapter4">
+                <header class="chapter-header">
+                    <span class="chapter-number">Chapter 04</span>
+                    <h2 class="chapter-title">年夜饭</h2>
+                </header>
+
+                <p>大年三十，林薇没有回湖南。</p>
+
+                <p>那盆蝴蝶兰摆在茶几上。紫色的花，在昏暗的房间里，像一小团凝固的火焰。</p>
+
+                <figure class="story-image">
+                    <img src="assets/04_dinner.jpg" alt="年夜饭">
+                    <figcaption>大年三十，蝴蝶兰在茶几上绽放</figcaption>
+                </figure>
+
+                <p>"我给公司写了封信。"陈博士说，"关于那个'价值贡献度37%'的报告。"</p>
+
+                <p>"我告诉他们，那个评估模型有问题。它假设所有工作都可以被量化，被分类，被归因。但它漏掉了一样东西——时间的质地。"</p>
+
+                <blockquote>
+                    <p>"你的价值，林薇，不是你能做什么AI做不到的事。因为最终，AI可能什么都能做。"</p>
+                    <p>"你的价值是，你<strong>选择</strong>在场。在那种不确定的、模糊的、可能没有结果的情境里，<strong>选择</strong>留下来。"</p>
+                    <p>"这是一种伦理立场，不是一种职业能力。"</p>
+                </blockquote>
+
+                <p>"就像陈皮。新鲜的柑橘皮，很大，很薄，充满水分。但十三年的陈化之后，它缩小了，变厚了，皱缩了，但香味更浓了。"</p>
+
+                <p>"也许我们剩下的那部分，是浓缩后的东西。是那些不能被稀释的、不能被算法分解的……人的部分。"</p>
+
+                <p>窗外，新年的钟声敲响。遥远的地方，有人在放烟花，一声，又一声，像心跳。</p>
+
+                <p>紫色的蝴蝶兰在灯光下微微颤动，仿佛随时会飞走。</p>
+
+                <div class="highlight-box">
+                    <p>但还在这里。<br>还在这里。</p>
+                </div>
+            </section>
+
+            <div class="author-note">
+                <div class="author-note-title">📝 写在后面</div>
+                <p>这是一个关于MSL、AI与"在场"的故事。我不知道"在场"究竟有什么用，也许它只是浓缩——像十三年的陈皮，像琥珀里的瞬间。</p>
+                <p style="margin-top: 0.75rem;">如果你也是MSL，你是否也在思考：在AI越来越强大的今天，我们还能做什么？</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">琥珀色的光</h3>
+            <p class="footer-text">一个关于MSL、AI与"在场"的故事</p>
+            <div class="footer-divider"></div>
+            <p class="footer-copyright">感谢阅读 | 春节愉快</p>
+        </div>
+    </footer>
+</body>
+</html>

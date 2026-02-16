@@ -4,232 +4,916 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MSL千里马运势签 - 2026马年专属</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Uroweb-inspired Color System */
+            --color-primary: #FE6B2E;
+            --color-primary-light: #FE8B5B;
+            --color-primary-dark: #E04201;
+            --color-secondary: #65ABDC;
+            --color-secondary-light: #EBF6FD;
+            --color-secondary-dark: #152443;
+            --color-navy: #152443;
+            --color-darkest: #152443;
+            --color-lightest: #fff;
+
+            /* Grays */
+            --color-gray-100: #FDFDFE;
+            --color-gray-200: #F3F3F6;
+            --color-gray-300: #D6D6D6;
+            --color-gray-400: #bababa;
+            --color-gray-500: #707070;
+            --color-gray-600: #5a5a5a;
+            --color-gray-700: #454545;
+            --color-gray-800: #313131;
+
+            /* Typography */
+            --font-serif: 'Noto Serif SC', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: var(--font-sans);
+            background: var(--color-gray-100);
+            color: var(--color-gray-800);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo::before {
+            content: "◆";
+            color: var(--color-primary);
+            font-size: 0.875rem;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .nav-back:hover {
+            color: var(--color-primary);
+        }
+
+        /* Main Container */
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-gray-100) 100%);
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(254, 107, 46, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: rgba(254, 107, 46, 0.1);
+            color: var(--color-primary-dark);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            color: var(--color-primary);
+        }
+
+        .hero-divider::before,
+        .hero-divider::after {
+            content: "";
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-primary-light));
+        }
+
+        .hero-divider::after {
+            background: linear-gradient(90deg, var(--color-primary-light), transparent);
+        }
+
+        /* Draw Section */
+        .draw-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            position: relative;
+        }
+
+        .draw-container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .draw-hint {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .draw-hint strong {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* Fortune Tube */
+        .tube-container {
+            position: relative;
+            width: 200px;
+            height: 280px;
+            margin: 0 auto var(--spacing-xl);
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tube {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, var(--color-navy) 0%, #1a2d4d 50%, var(--color-navy) 100%);
+            border-radius: 20px 20px 40px 40px;
+            position: relative;
+            box-shadow:
+                0 20px 40px rgba(21, 36, 67, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tube:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 24px 48px rgba(21, 36, 67, 0.35),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tube.shaking {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-5px) rotate(-2deg); }
+            75% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        .tube-top {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(145deg, var(--color-primary-light), var(--color-primary));
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(254, 107, 46, 0.3);
+        }
+
+        .tube-sticks {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .stick {
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+            border-radius: 3px;
+            transform-origin: bottom center;
+        }
+
+        .stick:nth-child(1) { transform: rotate(-15deg); height: 55px; }
+        .stick:nth-child(2) { transform: rotate(-8deg); height: 65px; }
+        .stick:nth-child(3) { transform: rotate(0deg); height: 70px; }
+        .stick:nth-child(4) { transform: rotate(8deg); height: 62px; }
+        .stick:nth-child(5) { transform: rotate(15deg); height: 58px; }
+
+        .tube-icon {
+            font-size: 4rem;
+            margin-top: var(--spacing-lg);
+        }
+
+        .tube-label {
+            position: absolute;
+            bottom: 40px;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tube-shadow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(21, 36, 67, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* Progress Ring */
+        .progress-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .progress-ring.active {
+            opacity: 1;
+        }
+
+        .progress-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: var(--color-gray-200);
+            stroke-width: 4;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: url(#ringGradient);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 754;
+            stroke-dashoffset: 754;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
+        /* Press Hint */
+        .press-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+        }
+
+        .press-hint-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Result Modal */
+        .result-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(21, 36, 67, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .result-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            max-width: 420px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: var(--spacing-xl);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .result-modal.show .result-card {
+            transform: translateY(0);
+        }
+
+        .result-close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            width: 36px;
+            height: 36px;
+            background: var(--color-gray-100);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            color: var(--color-gray-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .result-close:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .result-badge.da-ji {
+            background: linear-gradient(135deg, #FFE5D9 0%, #FFD4C4 100%);
+            color: #C43E00;
+        }
+
+        .result-badge.zhong-ji {
+            background: linear-gradient(135deg, #E8F4FD 0%, #D4EBFA 100%);
+            color: #1E5F8E;
+        }
+
+        .result-badge.xiao-ji {
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            color: #166534;
+        }
+
+        .result-badge.ping {
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            color: #4B5563;
+        }
+
+        .result-badge.qu {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            color: #92400E;
+        }
+
+        .result-number {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .result-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
+
+        .result-content {
+            background: var(--color-gray-100);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .result-content::before {
+            content: """;
+            position: absolute;
+            top: var(--spacing-sm);
+            left: var(--spacing-md);
+            font-size: 3rem;
+            color: var(--color-primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .result-content p {
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            color: var(--color-gray-800);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-detail {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .luck-section {
+            border-top: 1px solid var(--color-gray-200);
+            padding-top: var(--spacing-md);
+        }
+
+        .luck-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+
+        .luck-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .luck-item {
+            text-align: center;
+        }
+
+        .luck-label {
+            font-size: 0.75rem;
+            color: var(--color-gray-500);
+            margin-bottom: 4px;
+        }
+
+        .luck-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: var(--font-serif);
+        }
+
+        .luck-value.career { color: #C5504B; }
+        .luck-value.wealth { color: #E8843C; }
+        .luck-value.love { color: #D4A574; }
+        .luck-value.health { color: #5B8A72; }
+
+        .result-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+        }
+
+        .btn {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--color-gray-100);
+            color: var(--color-gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-gray-200);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-navy);
+            color: var(--color-gray-400);
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .nav {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+
+            .hero {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+
+            .draw-section {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .tube-container {
+                width: 160px;
+                height: 224px;
+            }
+
+            .tube-icon {
+                font-size: 3rem;
+            }
+
+            .tube-label {
+                font-size: 1.5rem;
+            }
+
+            .result-card {
+                padding: var(--spacing-lg);
+            }
+
+            .luck-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 加载动画 -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-icon">🐎</div>
-            <p class="loading-text">千里马正在赶来...</p>
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="nav-back">
+                <span>←</span>
+                <span>返回</span>
+            </a>
+            <a href="../index.html" class="nav-logo">运势签</a>
+            <div style="width: 60px;"></div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-badge">2026 马年</span>
+                <h1 class="hero-title">MSL千里马运势签</h1>
+                <p class="hero-subtitle">专为医药人定制的新年运势</p>
+                <div class="hero-divider">◆</div>
+            </div>
+        </section>
+
+        <section class="draw-section">
+            <div class="draw-container">
+                <p class="draw-hint">诚心默念，<strong>长按签筒</strong>获取您的专属运势</p>
+
+                <div class="tube-container" id="tubeContainer">
+                    <div class="progress-ring" id="progressRing">
+                        <svg viewBox="0 0 240 240">
+                            <defs>
+                                <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FE8B5B" />
+                                    <stop offset="100%" style="stop-color:#FE6B2E" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="progress-ring-bg" cx="120" cy="120" r="120"/>
+                            <circle class="progress-ring-fill" id="ringFill" cx="120" cy="120" r="120"/>
+                        </svg>
+                    </div>
+                    <div class="tube" id="tube">
+                        <div class="tube-top"></div>
+                        <div class="tube-sticks">
+                            <div class="stick"></div>
+                            <div class="stick"></div>
+                            <div class="stick"></div>
+                            <div class="stick"></div>
+                            <div class="stick"></div>
+                        </div>
+                        <div class="tube-icon">🐎</div>
+                        <div class="tube-label">運</div>
+                    </div>
+                    <div class="tube-shadow"></div>
+                </div>
+
+                <div class="press-hint" id="pressHint">
+                    <div class="press-hint-icon">👆</div>
+                    <span>长按抽签</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>长按保存图片，即可分享到朋友圈</p>
+        </footer>
+    </main>
+
+    <!-- Result Modal -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-card">
+            <button class="result-close" id="closeBtn">✕</button>
+            <div class="result-badge" id="levelBadge">
+                <span class="badge-text"></span>
+            </div>
+            <div class="result-number" id="fortuneNumber"></div>
+            <h2 class="result-title" id="fortuneTitle"></h2>
+            <div class="result-content">
+                <p id="fortuneContent"></p>
+            </div>
+            <div class="result-detail" id="fortuneDetail"></div>
+            <div class="luck-section">
+                <div class="luck-title">运势指数</div>
+                <div class="luck-grid" id="luckMeter"></div>
+            </div>
+            <div class="result-actions">
+                <button class="btn btn-secondary" id="againBtn">🔄 再抽一支</button>
+                <button class="btn btn-primary" id="saveBtn">💾 保存卡片</button>
+            </div>
         </div>
     </div>
 
-    <!-- 粒子背景 -->
-    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    <script>
+        // Fortune data
+        const fortunes = [
+            {id: 1, level: "大吉", levelCode: "da-ji", title: "🐎 千里马遇伯乐", content: "那位难搞的大主任，终于记住你名字了", detail: "你的专业被看见。下周的拜访，对方会主动询问你的意见。准备一份精炼的数据总结，机会留给有准备的人。", luck: {career: 95, wealth: 80, love: 70, health: 85}},
+            {id: 2, level: "大吉", levelCode: "da-ji", title: "🚀 一马当先", content: "你提的医学洞察被总部采纳，全球分享", detail: "三个月前那个'不确定有没有价值'的观察，现在成了关键策略。相信你的直觉，MSL的眼睛能看见数据背后的故事。", luck: {career: 98, wealth: 75, love: 72, health: 80}},
+            {id: 3, level: "大吉", levelCode: "da-ji", title: "✨ 马到成功", content: "下周见的KOL态度180度转弯，主动问你要新资料", detail: "曾经的反对者变成了支持者。不是你说服了他，是他自己看到了证据。保持谦逊，功劳属于科学。", luck: {career: 96, wealth: 82, love: 78, health: 88}},
+            {id: 4, level: "大吉", levelCode: "da-ji", title: "🌟 万马奔腾", content: "团队协作如有神助，项目提前一个月落地", detail: "医学部、销售部、市场部，本周空前默契。你恰好处在信息交汇点，做那个传递火炬的人。", luck: {career: 94, wealth: 85, love: 80, health: 90}},
+            {id: 5, level: "大吉", levelCode: "da-ji", title: "🎊 金马玉堂", content: "年度评估超出预期，陈博士给你写了推荐信", detail: "不只是KPI。有人注意到了你在'不确定'里的坚持。那封邮件已经在路上了，年后会有好消息。", luck: {career: 97, wealth: 88, love: 75, health: 82}},
+            {id: 6, level: "中吉", levelCode: "zhong-ji", title: "📚 马不停蹄", content: "读完三篇NEJM，发现它们之间的矛盾之处", detail: "AI读得很快，但你读得很深。那个被忽略的亚组分析，可能藏着下一个大发现。写下来，和周教授聊聊。", luck: {career: 85, wealth: 70, love: 68, health: 75}},
+            {id: 7, level: "中吉", levelCode: "zhong-ji", title: "☕ 老马识途", content: "早茶偶遇十年前的客户，聊出一个IIT机会", detail: "陶陶居二楼的偶遇不是运气，是你十年如一日的'在场'。那些你记得的细节，对方也记得。", luck: {career: 82, wealth: 75, love: 72, health: 80}},
+            {id: 8, level: "中吉", levelCode: "zhong-ji", title: "🌅 快马加鞭", content: "赶在最后期限前提交，系统显示你是第888位", detail: "数字吉利，但更重要的是你没有敷衍。那份报告的脚注里，藏着你对患者的真正关心。", luck: {career: 80, wealth: 72, love: 70, health: 78}},
+            {id: 9, level: "中吉", levelCode: "zhong-ji", title: "🎯 汗马功劳", content: "销售部阿杰终于搞懂了那个机制，你在他眼中看到光", detail: "教育不是灌输，是点燃。这周的培训，有人听进去了。下周的拜访，他会用得上的。", luck: {career: 84, wealth: 68, love: 75, health: 82}},
+            {id: 10, level: "中吉", levelCode: "zhong-ji", title: "🔍 庖丁解牛", content: "混乱的临床数据里，你找到了那条隐藏的线索", detail: "AI看到了相关性，你看到了因果。那个'异常值'不是噪声，是一个真实的人。记下来，这是一个琥珀。", luck: {career: 86, wealth: 70, love: 68, health: 76}},
+            {id: 11, level: "中吉", levelCode: "zhong-ji", title: "🤝 马首是瞻", content: "新来的MSL问你职业规划，你说了'在场'两个字", detail: "mentoring不是传授技巧，是传递价值观。对方眼中的困惑，你当年也有过。这是传承。", luck: {career: 83, wealth: 72, love: 78, health: 80}},
+            {id: 12, level: "中吉", levelCode: "zhong-ji", title: "🌧️ 风雨之后", content: "被挑战的方案，在MDT上获得了外科主任的认可", detail: "郑主任点头的那一刻，你知道坚持有价值。证据是硬的，但传递证据需要柔软的手。", luck: {career: 81, wealth: 70, love: 75, health: 85}},
+            {id: 13, level: "中吉", levelCode: "zhong-ji", title: "📖 厚积薄发", content: "整理旧文献，发现三年前忽略的重要随访数据", detail: "时间给了你礼物。那些当时看似无用的积累，现在成了关键拼图。相信陈皮的哲学。", luck: {career: 79, wealth: 74, love: 72, health: 78}},
+            {id: 14, level: "小吉", levelCode: "xiao-ji", title: "📝 下马看花", content: "出差路上读完一本非专业书，意外获得新视角", detail: "跨界不是不务正业。那本草帽诗集中的某个比喻，明天可能会帮你说服一位诗人出身的主任。", luck: {career: 72, wealth: 68, love: 75, health: 80}},
+            {id: 15, level: "小吉", levelCode: "xiao-ji", title: "☕ 午后闲情", content: "周教授办公室多待了一刻钟，听到一个患者故事", detail: "这不是'拜访记录'里的内容。但那个故事，会让你下周写报告时，多一分温度。", luck: {career: 70, wealth: 65, love: 78, health: 82}},
+            {id: 16, level: "小吉", levelCode: "xiao-ji", title: "🎧 塞翁失马", content: "错过的航班，让你在机场安静读完那份48页的报告", detail: "延误不是灾难，是生活给你的缓冲。那些标注的疑问，明天会变成有价值的提问。", luck: {career: 74, wealth: 62, love: 70, health: 85}},
+            {id: 17, level: "小吉", levelCode: "xiao-ji", title: "🌿 青梅竹马", content: "想起入行时的导师，发了一条问候消息", detail: "连接不是为了KPI。那些曾经的引路人，也值得被'在场'。文字的温暖，会双向流动。", luck: {career: 68, wealth: 70, love: 85, health: 78}},
+            {id: 18, level: "小吉", levelCode: "xiao-ji", title: "🍵 粗茶淡饭", content: "自己带的便当，比外卖多了一点仪式感", detail: "照顾好自己不是自私。你是连接医生和患者的人，你的状态，会影响你传递的信息。", luck: {career: 66, wealth: 72, love: 74, health: 88}},
+            {id: 19, level: "小吉", levelCode: "xiao-ji", title: "🚇 地铁观察", content: "早高峰注意到一位老人看药品说明书，你忍不住帮了他", detail: "这不是工作职责。但'在场'是一种习惯，不分场合。那个道谢的眼神，是今天的第一个琥珀。", luck: {career: 70, wealth: 68, love: 80, health: 82}},
+            {id: 20, level: "小吉", levelCode: "xiao-ji", title: "📱 数字排毒", content: "睡前一小时没看工作群，睡眠质量显著提升", detail: "边界感也是专业的一部分。你不是24小时待机的AI，你需要offline来保持人的敏感。", luck: {career: 65, wealth: 66, love: 72, health: 90}},
+            {id: 21, level: "小吉", levelCode: "xiao-ji", title: "📝 错题本哲学", content: "整理了一次失败的拜访，发现了三个改进点", detail: "反思不是自我否定。那些'不顺利'，往往是AI学不会的东西。记下来，这是你的独家数据。", luck: {career: 76, wealth: 64, love: 70, health: 80}},
+            {id: 22, level: "平", levelCode: "ping", title: "⏳ 按辔徐行", content: "今天没有惊喜，但所有流程都顺利走完", detail: "平淡是MSL的日常。不是每一天都有洞察，但每一天的积累都在发酵。接受这种节奏。", luck: {career: 70, wealth: 70, love: 70, health: 70}},
+            {id: 23, level: "平", levelCode: "ping", title: "☁️ 云卷云舒", content: "AI生成的报告，你改了一个词，让它更像人写的", detail: "微小的坚持，也是抵抗。那个词的改动，可能会让读报告的人，少一分冰冷，多一分温度。", luck: {career: 68, wealth: 68, love: 72, health: 72}},
+            {id: 24, level: "平", levelCode: "ping", title: "🔄 日复一日", content: "随访了那个稳定的患者，好消息是没有坏消息", detail: "医学的常态是'没有变化'。珍惜这种平凡，它意味着someone's life is still going on。", luck: {career: 65, wealth: 70, love: 68, health: 75}},
+            {id: 25, level: "平", levelCode: "ping", title: "📚 温故知新", content: "重读一篇旧文献，发现了之前没注意的方法学细节", detail: "经典值得重读。你的专业成长，就藏在这些'再读一遍'的时刻里。", luck: {career: 72, wealth: 66, love: 70, health: 72}},
+            {id: 26, level: "平", levelCode: "ping", title: "🌱 静待花开", content: "种下的那盆蝴蝶兰，还没有开花的迹象", detail: "不是所有投入都有即时回报。相信时间，相信陈化。你的努力，会以意想不到的方式结果。", luck: {career: 66, wealth: 72, love: 75, health: 70}},
+            {id: 27, level: "趣", levelCode: "qu", title: "😅 马失前蹄", content: "把给周教授的邮件发给了周主任，幸好内容差不多", detail: "尴尬也是连接的一部分。下次见面，这会成为一个让你们都放松的笑话。人都会犯错。", luck: {career: 60, wealth: 65, love: 85, health: 75}},
+            {id: 28, level: "趣", levelCode: "qu", title: "🍜 马上就到", content: "告诉客户'五分钟到'，实际上你还在地铁上", detail: "善意的谎言，是为了给对方留准备时间。但下次，多预留十分钟吧，回南天的广州，鞋子会湿。", luck: {career: 58, wealth: 62, love: 70, health: 80}},
+            {id: 29, level: "趣", levelCode: "qu", title: "🤖 AI幻觉", content: "小枢生成了一份关于'不存在的研究'的报告，你花了十分钟才发现", detail: "AI也会一本正经地胡说八道。你的价值，就是做这个验证者。质疑，是你的超能力。", luck: {career: 62, wealth: 60, love: 68, health: 85}},
+            {id: 30, level: "趣", levelCode: "qu", title: "🎲 马上有钱", content: "系统Bug，你的差旅费多报了一个零，主动退回去了", detail: "诚实是最好的策略。虽然失去了'意外之财'，但获得了心安理得。这算好运吗？算。", luck: {career: 75, wealth: 55, love: 72, health: 88}}
+        ];
 
-    <!-- 导航 -->
-    <nav class="fortune-nav">
-        <a href="../index.html" class="nav-back">
-            <span class="nav-arrow">←</span>
-            <span>返回</span>
-        </a>
-        <div class="nav-title">
-            <span class="nav-icon">🐎</span>
-            <span>马年运势签</span>
-        </div>
-        <span class="nav-placeholder"></span>
-    </nav>
+        // State
+        let isPressing = false;
+        let pressTimer = null;
+        let currentFortune = null;
 
-    <!-- 首页 - 英雄区 -->
-    <section class="hero-section" id="heroSection">
-        <div class="hero-bg">
-            <div class="hero-horse"></div>
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <div class="year-badge-container">
-                <span class="year-badge">2026 马年</span>
-            </div>
-            <h1 class="hero-title">
-                <span class="title-line">MSL</span>
-                <span class="title-line highlight">千里马运势签</span>
-            </h1>
-            <p class="hero-subtitle">专为医药人定制的新年运势</p>
-            <div class="hero-divider">
-                <span class="divider-line"></span>
-                <span class="divider-icon">❋</span>
-                <span class="divider-line"></span>
-            </div>
-            <button class="start-btn" id="startBtn">
-                <span class="btn-glow"></span>
-                <span class="btn-text">开始抽签</span>
-                <span class="btn-icon">🎋</span>
-            </button>
-        </div>
-        <div class="scroll-hint">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <span>向上滑动</span>
-        </div>
-    </section>
+        // Elements
+        const tubeContainer = document.getElementById('tubeContainer');
+        const tube = document.getElementById('tube');
+        const progressRing = document.getElementById('progressRing');
+        const ringFill = document.getElementById('ringFill');
+        const pressHint = document.getElementById('pressHint');
+        const resultModal = document.getElementById('resultModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const againBtn = document.getElementById('againBtn');
+        const saveBtn = document.getElementById('saveBtn');
 
-    <!-- 抽签页面 -->
-    <section class="draw-section hidden" id="drawSection">
-        <div class="draw-bg">
-            <div class="draw-bg-image"></div>
-            <div class="draw-bg-overlay"></div>
-        </div>
+        // Press handlers
+        function startPress(e) {
+            e.preventDefault();
+            if (currentFortune || isPressing) return;
 
-        <div class="draw-content">
-            <div class="draw-header">
-                <h2 class="draw-title">诚心默念</h2>
-                <p class="draw-subtitle">长按签筒，获取您的专属运势</p>
-            </div>
+            isPressing = true;
+            progressRing.classList.add('active');
+            pressHint.style.opacity = '0';
 
-            <!-- 签筒容器 -->
-            <div class="tube-area">
-                <!-- 进度环 -->
-                <div class="progress-ring" id="progressRing">
-                    <svg viewBox="0 0 320 320">
-                        <defs>
-                            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#D4A574" />
-                                <stop offset="50%" style="stop-color:#C5504B" />
-                                <stop offset="100%" style="stop-color:#D4A574" />
-                            </linearGradient>
-                        </defs>
-                        <circle class="ring-bg" cx="160" cy="160" r="150"/>
-                        <circle class="ring-fill" id="ringFill" cx="160" cy="160" r="150"/>
-                    </svg>
-                </div>
+            if (navigator.vibrate) navigator.vibrate(50);
 
-                <!-- 签筒 -->
-                <div class="tube-wrapper" id="tubeWrapper">
-                    <div class="tube-glow"></div>
-                    <div class="tube-container" id="tubeContainer">
-                        <div class="tube-horse-mascot">
-                            <img src="../assets/mascot-horse.png" alt="千里马" class="mascot-img">
-                        </div>
-                        <div class="tube-body">
-                            <div class="tube-top"></div>
-                            <div class="tube-middle">
-                                <div class="sticks">
-                                    <div class="stick s1"></div>
-                                    <div class="stick s2"></div>
-                                    <div class="stick s3"></div>
-                                    <div class="stick s4"></div>
-                                    <div class="stick s5"></div>
-                                </div>
-                            </div>
-                            <div class="tube-bottom"></div>
-                            <div class="tube-text">運</div>
-                        </div>
-                        <div class="tube-shadow"></div>
-                    </div>
-                    <div class="press-hint" id="pressHint">
-                        <div class="hint-icon">
-                            <span class="finger">👆</span>
-                            <div class="hint-pulse"></div>
-                        </div>
-                        <span class="hint-text">长按抽签</span>
-                    </div>
-                </div>
-            </div>
+            let progress = 0;
+            pressTimer = setInterval(() => {
+                progress += 0.02;
+                if (ringFill) {
+                    ringFill.style.strokeDashoffset = 754 - (754 * progress);
+                }
 
-            <div class="draw-footer">
-                <div class="fortune-poems">
-                    <div class="poem-item">千里之行</div>
-                    <div class="poem-dot">·</div>
-                    <div class="poem-item">始于足下</div>
-                    <div class="poem-dot">·</div>
-                    <div class="poem-item">马到成功</div>
-                </div>
-            </div>
-        </div>
-    </section>
+                if (progress >= 1) {
+                    clearInterval(pressTimer);
+                    performDraw();
+                }
+            }, 30);
+        }
 
-    <!-- 结果页面 -->
-    <section class="result-section hidden" id="resultSection">
-        <div class="result-bg"></div>
+        function endPress() {
+            if (!isPressing || currentFortune) return;
+            clearInterval(pressTimer);
+            isPressing = false;
+            progressRing.classList.remove('active');
+            pressHint.style.opacity = '1';
+            if (ringFill) ringFill.style.strokeDashoffset = 754;
+        }
 
-        <div class="result-content">
-            <!-- 结果卡片 -->
-            <div class="result-card" id="resultCard">
-                <div class="card-decoration-top">
-                    <img src="../assets/card-decoration.png" alt="">
-                </div>
-                <div class="card-decoration-bottom">
-                    <img src="../assets/card-decoration.png" alt="">
-                </div>
+        function performDraw() {
+            currentFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+            tube.classList.add('shaking');
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]);
 
-                <div class="card-inner">
-                    <!-- 等级标签 -->
-                    <div class="level-badge" id="levelBadge">
-                        <span class="badge-text"></span>
-                    </div>
+            setTimeout(() => {
+                tube.classList.remove('shaking');
+                showResult();
+            }, 1200);
+        }
 
-                    <!-- 签号 -->
-                    <div class="fortune-number" id="fortuneNumber"></div>
+        function showResult() {
+            const badge = document.getElementById('levelBadge');
+            const fortuneNumber = document.getElementById('fortuneNumber');
+            const fortuneTitle = document.getElementById('fortuneTitle');
+            const fortuneContent = document.getElementById('fortuneContent');
+            const fortuneDetail = document.getElementById('fortuneDetail');
+            const luckMeter = document.getElementById('luckMeter');
 
-                    <!-- 签名 -->
-                    <h2 class="fortune-title" id="fortuneTitle"></h2>
+            if (badge) {
+                badge.className = 'result-badge ' + currentFortune.levelCode;
+                badge.textContent = currentFortune.level;
+            }
+            if (fortuneNumber) fortuneNumber.textContent = '第 ' + currentFortune.id + ' 签';
+            if (fortuneTitle) fortuneTitle.textContent = currentFortune.title;
+            if (fortuneContent) fortuneContent.textContent = currentFortune.content;
+            if (fortuneDetail) fortuneDetail.textContent = currentFortune.detail;
 
-                    <!-- 签文内容 -->
-                    <div class="fortune-content-wrapper">
-                        <div class="content-decoration left">❝</div>
-                        <div class="fortune-content" id="fortuneContent"></div>
-                        <div class="content-decoration right">❞</div>
-                    </div>
+            if (luckMeter) {
+                const luckLabels = ['事业', '财运', '人际', '健康'];
+                const luckKeys = ['career', 'wealth', 'love', 'health'];
+                const luckClasses = ['career', 'wealth', 'love', 'health'];
 
-                    <!-- 详解 -->
-                    <div class="fortune-detail" id="fortuneDetail"></div>
+                let html = '';
+                for (let i = 0; i < luckLabels.length; i++) {
+                    html += '<div class="luck-item">';
+                    html += '<div class="luck-label">' + luckLabels[i] + '</div>';
+                    html += '<div class="luck-value ' + luckClasses[i] + '">' + currentFortune.luck[luckKeys[i]] + '</div>';
+                    html += '</div>';
+                }
+                luckMeter.innerHTML = html;
+            }
 
-                    <!-- 运势指数 -->
-                    <div class="luck-section">
-                        <div class="section-title">
-                            <span class="title-line left"></span>
-                            <span class="title-text">运势指数</span>
-                            <span class="title-line right"></span>
-                        </div>
-                        <div class="luck-meter" id="luckMeter"></div>
-                    </div>
-                </div>
-            </div>
+            resultModal.classList.add('show');
+        }
 
-            <!-- 操作按钮 -->
-            <div class="action-buttons">
-                <button class="action-btn btn-save" id="saveBtn">
-                    <span class="btn-icon">💾</span>
-                    <span class="btn-text">保存运势卡片</span>
-                </button>
-                <button class="action-btn btn-again" id="againBtn">
-                    <span class="btn-icon">🔄</span>
-                    <span class="btn-text">再抽一支</span>
-                </button>
-            </div>
+        function resetDraw() {
+            currentFortune = null;
+            if (ringFill) ringFill.style.strokeDashoffset = 754;
+            resultModal.classList.remove('show');
+            progressRing.classList.remove('active');
+            pressHint.style.opacity = '1';
+        }
 
-            <!-- 分享提示 -->
-            <div class="share-tip" id="shareTip">
-                <div class="tip-icon">💡</div>
-                <p>长按保存图片，即可分享到朋友圈</p>
-                <p class="sub-tip">转发给同事，一起接好运</p>
-            </div>
-        </div>
-    </section>
+        // Event listeners
+        tubeContainer.addEventListener('touchstart', startPress, {passive: false});
+        tubeContainer.addEventListener('mousedown', startPress);
+        tubeContainer.addEventListener('touchend', endPress);
+        tubeContainer.addEventListener('mouseup', endPress);
+        tubeContainer.addEventListener('mouseleave', endPress);
 
-    <!-- 生成中提示 -->
-    <div class="generating-overlay" id="generating">
-        <div class="generating-content">
-            <div class="spinner">
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-            </div>
-            <p class="generating-text">正在生成运势卡片...</p>
-            <p class="generating-sub">千里马的祝福即将送达</p>
-        </div>
-    </div>
+        closeBtn.addEventListener('click', () => resultModal.classList.remove('show'));
+        againBtn.addEventListener('click', resetDraw);
 
-    <!-- 隐藏画布 -->
-    <canvas id="shareCanvas" width="750" height="1334"></canvas>
+        // Save button (placeholder)
+        saveBtn.addEventListener('click', () => {
+            alert('截图功能需要在支持的环境下运行。您可以手动截图保存。');
+        });
 
-    <!-- 音效 -->
-    <audio id="shakeSound" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZSA0PVanu87plHQUuh9Dz2YU2Bhxqv+zplkcODVGm5O+4ZSAEMYrO89GFNwYdcfDr4ZdJDAtQp+XysWUeBjqT1/LNfi0GI33R8tOENAcdcO/r4phJDQxPp+XyxGUhBDeOzvPXhjYGHG3A7+WaSQ0MT6jl8b9kHwU2jc7z2YU1Bhxwv+zmm0gNC1Gn5O/EZSAFNo/M89CEMwYccPDs4ppIDQtRp+TvvWUfBTiOz/PShjUGG3Dw7OKbSA0LUqjl8b1kHwU2jM7z1YU1Bxtwv+zmmUgNC1Ko5O/EZSAF" type="audio/wav">
-    </audio>
-
-    <script src="script.js"></script>
+        // Close modal on backdrop click
+        resultModal.addEventListener('click', (e) => {
+            if (e.target === resultModal) {
+                resultModal.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
