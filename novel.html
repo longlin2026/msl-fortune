@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>琥珀色的光 - MSL 琥珀光</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red: #C5504B;
+            --red-dark: #A5403C;
+            --gold: #D4A574;
+            --gold-light: #F5E6D3;
+            --bg: #FDF8F3;
+            --bg-warm: #F9F1E8;
+            --text: #3D2817;
+            --text-light: #8B7355;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 2;
+        }
+
+        /* 导航 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--red);
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+
+        /* 头部 */
+        .article-header {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+            position: relative;
+        }
+
+        .article-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--red);
+            border-radius: 3px;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .article-meta {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .article-meta span {
+            margin: 0 0.8rem;
+        }
+
+        /* 文章内容 */
+        .article-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .chapter {
+            margin-bottom: 4rem;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            color: var(--red);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .chapter p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            font-size: 1.05rem;
+            text-indent: 2em;
+        }
+
+        .chapter p:first-of-type {
+            text-indent: 0;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 3rem 0;
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 1rem;
+        }
+
+        /* 引用块 */
+        blockquote {
+            background: var(--white);
+            border-left: 4px solid var(--red);
+            padding: 1.5rem 1.5rem 1.5rem 2rem;
+            margin: 2rem 0;
+            color: var(--text-light);
+            font-style: italic;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        blockquote p {
+            text-indent: 0 !important;
+            margin-bottom: 0.8rem !important;
+        }
+
+        /* 结尾 */
+        .ending {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        .ending p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .ending .highlight {
+            color: var(--red);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* 下一篇导航 */
+        .next-nav {
+            background: var(--bg-warm);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .next-nav h3 {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            background: var(--red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(197, 80, 75, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .article-header {
+                padding-top: 7rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-content {
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            .chapter-title {
+                font-size: 1.2rem;
+            }
+
+            .chapter p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav>
+        <a href="index.html" class="logo">🐎 MSL 琥珀光</a>
+        <div class="nav-links">
+            <a href="novel.html">小说</a>
+            <a href="fortune/">运势签</a>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <h1>琥珀色的光</h1>
+        <div class="article-meta">
+            <span>一个关于 MSL 的故事</span>
+            <span>·</span>
+            <span>2026 马年新春</span>
+        </div>
+    </header>
+
+    <article class="article-content">
+        <section class="chapter">
+            <h2 class="chapter-title">一</h2>
+            <p>腊月二十三，小年夜。</p>
+            <p>林薇摘下全息眼镜，揉了揉发酸的眼眶。办公室的落地窗上凝结着细密的水珠，窗外是北京城绵延的灯火，像一片倒悬的星海。</p>
+            <p>"林老师，您还有三封未读邮件，两个待确认的学术会议邀请，以及——"桌面上的AI助手"小枢"投射出淡蓝色的光晕，"根据您的生物节律监测，建议您在20分钟内结束工作，以免影响睡眠质量。"</p>
+            <p>"知道了。"林薇端起已经凉透的咖啡，"今天的外联记录整理好了吗？"</p>
+            <p>"已完成。今日与7位KOL的语音沟通已全部转录、分析并归档。情绪分析显示，王主任对新品临床数据的信任度为78%，较上周提升12个百分点；李教授仍对安全性数据存疑，建议下次沟通时重点展示——"</p>
+            <p>"停。"林薇打断它。</p>
+            <p>她望着窗外。十二年前，她刚入行那会儿，MSL是个"靠腿吃饭"的活儿。背着沉甸甸的文献包，挤早班高铁去二三线城市的医院，在医生休息室门口等上两个小时，就为了换来十五分钟的面对面交流。那时候的她，记得每位专家喝咖啡还是喝茶，记得谁家的孩子刚高考完，记得谁对青霉素过敏。</p>
+            <p>现在，小枢可以在0.3秒内检索完过去十年某治疗领域的所有文献；可以在一次视频通话中同时分析对方微表情、语音语调和用词偏好，实时给出沟通策略建议；可以7×24小时回答医生们提出的任何医学问题，准确率达到97.6%。</p>
+            <p>而她，一个四十二岁的MSL，还能做什么？</p>
+            <p>手机震动。是母亲发来的视频请求。</p>
+            <p>"薇薇啊，你今年到底能不能回来过年？你爸把腊肉都熏好了，你最爱吃的那块五花肉……"</p>
+            <p>"妈，我尽量。最近有个很重要的项目——"</p>
+            <p>"忙忙忙，你每次都这么说。"母亲的声音低了下去，"你爸身体不太好，我想着，你能回来，他高兴高兴……"</p>
+            <p>"我知道了妈，我争取大年三十赶回去。"</p>
+            <p>挂断电话，林薇盯着黑下去的屏幕，心里像堵了一团湿棉花。</p>
+            <p>小枢的光晕又亮起来："检测到您的皮质醇水平上升，需要我播放冥想引导音频吗？"</p>
+            <p>"不需要。帮我联系陈主任，我想约他明天见个面。"</p>
+            <p>"已发送预约请求。根据历史数据，陈主任回复的概率为——"</p>
+            <p>"别说了，你下班吧。"</p>
+            <p>"我没有下班的概念，林老师。"</p>
+            <p>"那我下班。"</p>
+            <p>林薇关掉所有设备。办公室里只剩下空调出风口低沉的嗡鸣，和窗外那一片遥不可及的灯火。</p>
+        </section>
+
+        <div class="divider">* * *</div>
+
+        <section class="chapter">
+            <h2 class="chapter-title">二</h2>
+            <p>腊月二十四，小年第二天。</p>
+            <p>陈主任的回复直到上午十点才来，只有短短一行字："下午三点，医院对面茶馆。"</p>
+            <p>陈主任是肿瘤领域的权威，也是林薇合作了八年的老朋友。三年前，他还习惯在电话里跟她聊上半个小时，从最新的临床试验数据聊到各自的生活琐事。但现在，大多数时候，他更愿意直接跟小枢对话——高效、精准、随时可以找到。</p>
+            <p>茶馆藏在一条老胡同里，门口挂着两盏红灯笼，在寒风里轻轻摇晃。</p>
+            <p>陈主任已经到了，正在看平板电脑。他两鬓的白发比上次见面时又多了些。</p>
+            <p>"陈主任，好久不见。"林薇笑着走过去。</p>
+            <p>"坐。"陈主任抬起头，打量了她一眼，"你气色不太好，没休息好？"</p>
+            <p>"最近项目比较多。"</p>
+            <p>"AI越用越多，人越睡越晚，是吧？"陈主任笑了笑，给她倒了一杯茶。</p>
+            <p>林薇愣了一下："您怎么知道？"</p>
+            <p>"我闺女，跟你们同行，在另一家药企。天天加班调教她那个AI助手，说要'训练'它，让它更'懂'医生。"陈主任摇摇头，"我说她，你是MSL，不是程序员。她不听。"</p>
+            <p>林薇沉默了一会儿："陈主任，您现在……是不是也觉得，跟我们这些真人MSL交流，效率太低了？"</p>
+            <p>陈主任放下茶壶，认真地看着她："小林，你记得八年前，我第一版指南刚发布那会儿吗？"</p>
+            <p>"记得。那版指南争议很大，您压力很大。"</p>
+            <p>"那时候我天天失眠。有一天晚上三点，我给你打了个电话。"陈主任顿了顿，"我其实没什么具体问题，就是想找个人说说。说说我的顾虑，说说那些数据背后我没办法写进指南的担忧。"</p>
+            <p>林薇记得。那通电话打了四十七分钟。大部分时候是陈主任在说，她在听。</p>
+            <p>"现在呢，"陈主任指指自己的平板，"这个AI确实很厉害，我问什么它答什么，文献、数据、统计方法，比你还全面。但它不会问我'您最近是不是太累了'，也不会在我提到担心的时候，沉默一会儿，然后说'您已经做得很好了'。"</p>
+            <p>窗外传来零星的鞭炮声。要过年了。</p>
+            <p>"陈主任……"</p>
+            <p>"我下周要做一个大手术，"陈主任突然说，"一个老朋友，二十年的交情。肿瘤位置很复杂，成功率不高。"</p>
+            <p>林薇的心提了起来："您……"</p>
+            <p>"我这几天一直在想，如果手术失败了，我怎么跟他家人交代。"陈主任的声音很轻，"我问了你那个小枢，它给我列了十七种可能的并发症和对应的沟通话术。很专业，很全面。但……"</p>
+            <p>他抬起头，目光里有种林薇很熟悉的东西——那是人在面对不确定性时，那种深深的孤独。</p>
+            <p>"但我想跟你聊聊。"他说。</p>
+        </section>
+
+        <div class="divider">* * *</div>
+
+        <section class="chapter">
+            <h2 class="chapter-title">三</h2>
+            <p>腊月二十八。</p>
+            <p>林薇在医院外的长椅上坐了两个小时。</p>
+            <p>陈主任的手术下午两点开始，现在已经是四点十七分。手机屏幕上，小枢不断地推送消息：</p>
+            <blockquote>
+                <p>"检测到您的心率异常，是否需要联系急救服务？"</p>
+                <p>"根据该手术的平均时长，预计还有23分钟结束。"</p>
+                <p>"建议您可以利用等待时间处理积压邮件，我已为您优先级排序——"</p>
+            </blockquote>
+            <p>林薇关掉了通知。</p>
+            <p>她想起这五天来发生的一切。</p>
+            <p>腊月二十四那天，她和陈主任在茶馆里聊到华灯初上。她没有给他任何"话术建议"，只是听他说完了一个老医生二十年来与疾病、与死亡、与希望纠缠的故事。她说得很少，但陈主任走的时候，拍了拍她的肩膀，说"谢谢你，小林"。</p>
+            <p>第二天，她做了一个决定。她给小枢下了一个新指令："从现在开始，所有与专家的沟通，在发送任何回复之前，先让我过目。"</p>
+            <p>AI不理解，但它执行了。</p>
+            <p>于是，她开始重新看到那些"低效率"的东西：</p>
+            <p>王主任在邮件末尾加的那句"小林，注意身体"，小枢认为属于"非必要社交信息"，建议删除。她留下了。</p>
+            <p>李教授在询问数据时，顺便提了一句他女儿拿到了海外offer，小枢建议"忽略无关信息，直接回复专业问题"。她在回复里加了一句"恭喜李教授，您女儿一定是继承了您的聪明"。</p>
+            <p>一位年轻医生在深夜发来很长的消息，问一个其实很容易查到的数据，小枢建议"标准回复+知识库链接"。她打了个电话过去，发现对方其实是第一次独立负责一个疑难病例，需要的不是数据，是一句"你可以的"。</p>
+            <p>这些"多余"的动作，让她的工作效率下降了40%，但某种说不清楚的东西，在慢慢回来。</p>
+            <p>手术室的门开了。</p>
+            <p>林薇站起来，腿有些麻。陈主任走出来，口罩还挂在下巴上，脸上是深深的疲惫，但眼神是亮的。</p>
+            <p>"成功了？"她问。</p>
+            <p>"成功了。"陈主任笑了，"跟家属交代的时候，我脑子里一直在想你那句话——'医学不是数据的胜利，是信任的传递'。"</p>
+            <p>林薇也笑了。那是三年前，她在一次MSL内部分享会上说的话。那时候还没有小枢，没有这些无所不能的AI。</p>
+            <p>"小林，"陈主任认真地看着她，"我不知道你们这些年轻人现在的焦虑是什么，但我想告诉你，在这个什么都能被AI替代的时代，你愿意为一个人停下来，听他说完，这本身就是最珍贵的东西。"</p>
+            <p>"大年二十九了，"他拍拍她，"回家吧。你爸的腊肉，等不及了。"</p>
+        </section>
+
+        <div class="divider">* * *</div>
+
+        <section class="chapter">
+            <h2 class="chapter-title">四</h2>
+            <p>大年三十，清晨。</p>
+            <p>林薇拖着行李箱走进高铁站。手机响了，是公司AI系统的推送：</p>
+            <blockquote>
+                <p>"林老师，您本月的'深度人际连接指数'较上月提升了217%，这在全公司MSL团队中是罕见的正向变化。系统正在分析您的工作模式，准备向其他同事推广最佳实践。请确认是否授权？"</p>
+            </blockquote>
+            <p>林薇看着这条消息，笑出了声。</p>
+            <p>她回复："不授权。因为这不是什么'模式'，这是——"</p>
+            <p>她顿了顿，打下几个字：</p>
+            <p><strong>"这是人的事情。"</strong></p>
+            <p>高铁缓缓启动。窗外，冬日的田野在阳光下泛着琥珀色的光泽。远处有炊烟升起，有孩子在村口放鞭炮，有无数普通人，在用自己笨拙而真诚的方式，与这个世界连接。</p>
+            <p>林薇给母亲发了条消息："妈，我上车了。晚上吃饺子。"</p>
+            <p>母亲的回复秒到："好！好！给你包了白菜猪肉的！"</p>
+            <p>她望向窗外。新的一年要来了。</p>
+            <p>在这个AI可以模仿一切的时代，我们选择成为那个无法被模仿的自己——</p>
+            <p>不完美，不高效，但真实，且温暖。</p>
+            <p>就像琥珀色的光。</p>
+        </section>
+
+        <div class="ending">
+            <p>全文完</p>
+            <p>于 2026 马年新春</p>
+            <p class="highlight">琥珀光</p>
+        </div>
+    </article>
+
+    <section class="next-nav">
+        <h3>读完故事，来抽一支马年运势签？</h3>
+        <a href="fortune/" class="btn">🎋 去抽取运势签</a>
+    </section>
+
+    <footer>
+        <p>© 2026 MSL 琥珀光 · 故事虚构，情感真实</p>
+    </footer>
+
+    <script>
+        // 滚动进度条
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        });
+    </script>
+</body>
+</html>

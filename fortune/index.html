@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MSL千里马运势签 - 2026马年专属</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-icon">🐎</div>
+            <p class="loading-text">千里马正在赶来...</p>
+        </div>
+    </div>
+
+    <!-- 粒子背景 -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- 导航 -->
+    <nav class="fortune-nav">
+        <a href="../index.html" class="nav-back">
+            <span class="nav-arrow">←</span>
+            <span>返回</span>
+        </a>
+        <div class="nav-title">
+            <span class="nav-icon">🐎</span>
+            <span>马年运势签</span>
+        </div>
+        <span class="nav-placeholder"></span>
+    </nav>
+
+    <!-- 首页 - 英雄区 -->
+    <section class="hero-section" id="heroSection">
+        <div class="hero-bg">
+            <div class="hero-horse"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="year-badge-container">
+                <span class="year-badge">2026 马年</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">MSL</span>
+                <span class="title-line highlight">千里马运势签</span>
+            </h1>
+            <p class="hero-subtitle">专为医药人定制的新年运势</p>
+            <div class="hero-divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">❋</span>
+                <span class="divider-line"></span>
+            </div>
+            <button class="start-btn" id="startBtn">
+                <span class="btn-glow"></span>
+                <span class="btn-text">开始抽签</span>
+                <span class="btn-icon">🎋</span>
+            </button>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>向上滑动</span>
+        </div>
+    </section>
+
+    <!-- 抽签页面 -->
+    <section class="draw-section hidden" id="drawSection">
+        <div class="draw-bg">
+            <div class="draw-bg-image"></div>
+            <div class="draw-bg-overlay"></div>
+        </div>
+
+        <div class="draw-content">
+            <div class="draw-header">
+                <h2 class="draw-title">诚心默念</h2>
+                <p class="draw-subtitle">长按签筒，获取您的专属运势</p>
+            </div>
+
+            <!-- 签筒容器 -->
+            <div class="tube-area">
+                <!-- 进度环 -->
+                <div class="progress-ring" id="progressRing">
+                    <svg viewBox="0 0 320 320">
+                        <defs>
+                            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D4A574" />
+                                <stop offset="50%" style="stop-color:#C5504B" />
+                                <stop offset="100%" style="stop-color:#D4A574" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="ring-bg" cx="160" cy="160" r="150"/>
+                        <circle class="ring-fill" id="ringFill" cx="160" cy="160" r="150"/>
+                    </svg>
+                </div>
+
+                <!-- 签筒 -->
+                <div class="tube-wrapper" id="tubeWrapper">
+                    <div class="tube-glow"></div>
+                    <div class="tube-container" id="tubeContainer">
+                        <div class="tube-horse-mascot">
+                            <img src="../assets/mascot-horse.png" alt="千里马" class="mascot-img">
+                        </div>
+                        <div class="tube-body">
+                            <div class="tube-top"></div>
+                            <div class="tube-middle">
+                                <div class="sticks">
+                                    <div class="stick s1"></div>
+                                    <div class="stick s2"></div>
+                                    <div class="stick s3"></div>
+                                    <div class="stick s4"></div>
+                                    <div class="stick s5"></div>
+                                </div>
+                            </div>
+                            <div class="tube-bottom"></div>
+                            <div class="tube-text">運</div>
+                        </div>
+                        <div class="tube-shadow"></div>
+                    </div>
+                    <div class="press-hint" id="pressHint">
+                        <div class="hint-icon">
+                            <span class="finger">👆</span>
+                            <div class="hint-pulse"></div>
+                        </div>
+                        <span class="hint-text">长按抽签</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="draw-footer">
+                <div class="fortune-poems">
+                    <div class="poem-item">千里之行</div>
+                    <div class="poem-dot">·</div>
+                    <div class="poem-item">始于足下</div>
+                    <div class="poem-dot">·</div>
+                    <div class="poem-item">马到成功</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结果页面 -->
+    <section class="result-section hidden" id="resultSection">
+        <div class="result-bg"></div>
+
+        <div class="result-content">
+            <!-- 结果卡片 -->
+            <div class="result-card" id="resultCard">
+                <div class="card-decoration-top">
+                    <img src="../assets/card-decoration.png" alt="">
+                </div>
+                <div class="card-decoration-bottom">
+                    <img src="../assets/card-decoration.png" alt="">
+                </div>
+
+                <div class="card-inner">
+                    <!-- 等级标签 -->
+                    <div class="level-badge" id="levelBadge">
+                        <span class="badge-text"></span>
+                    </div>
+
+                    <!-- 签号 -->
+                    <div class="fortune-number" id="fortuneNumber"></div>
+
+                    <!-- 签名 -->
+                    <h2 class="fortune-title" id="fortuneTitle"></h2>
+
+                    <!-- 签文内容 -->
+                    <div class="fortune-content-wrapper">
+                        <div class="content-decoration left">❝</div>
+                        <div class="fortune-content" id="fortuneContent"></div>
+                        <div class="content-decoration right">❞</div>
+                    </div>
+
+                    <!-- 详解 -->
+                    <div class="fortune-detail" id="fortuneDetail"></div>
+
+                    <!-- 运势指数 -->
+                    <div class="luck-section">
+                        <div class="section-title">
+                            <span class="title-line left"></span>
+                            <span class="title-text">运势指数</span>
+                            <span class="title-line right"></span>
+                        </div>
+                        <div class="luck-meter" id="luckMeter"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <button class="action-btn btn-save" id="saveBtn">
+                    <span class="btn-icon">💾</span>
+                    <span class="btn-text">保存运势卡片</span>
+                </button>
+                <button class="action-btn btn-again" id="againBtn">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">再抽一支</span>
+                </button>
+            </div>
+
+            <!-- 分享提示 -->
+            <div class="share-tip" id="shareTip">
+                <div class="tip-icon">💡</div>
+                <p>长按保存图片，即可分享到朋友圈</p>
+                <p class="sub-tip">转发给同事，一起接好运</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 生成中提示 -->
+    <div class="generating-overlay" id="generating">
+        <div class="generating-content">
+            <div class="spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <p class="generating-text">正在生成运势卡片...</p>
+            <p class="generating-sub">千里马的祝福即将送达</p>
+        </div>
+    </div>
+
+    <!-- 隐藏画布 -->
+    <canvas id="shareCanvas" width="750" height="1334"></canvas>
+
+    <!-- 音效 -->
+    <audio id="shakeSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZSA0PVanu87plHQUuh9Dz2YU2Bhxqv+zplkcODVGm5O+4ZSAEMYrO89GFNwYdcfDr4ZdJDAtQp+XysWUeBjqT1/LNfi0GI33R8tOENAcdcO/r4phJDQxPp+XyxGUhBDeOzvPXhjYGHG3A7+WaSQ0MT6jl8b9kHwU2jc7z2YU1Bhxwv+zmm0gNC1Gn5O/EZSAFNo/M89CEMwYccPDs4ppIDQtRp+TvvWUfBTiOz/PShjUGG3Dw7OKbSA0LUqjl8b1kHwU2jM7z1YU1Bxtwv+zmmUgNC1Ko5O/EZSAF" type="audio/wav">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
