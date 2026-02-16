@@ -2,12 +2,12 @@
 
 专为医药 MSL 打造的 2026 马年运势抽签网站，包含精美动画和 30 支专属签文。
 
-🎋 **立即体验**：https://你的用户名.github.io/msl-fortune/fortune/
+🎋 **立即体验**：https://longlin2026.github.io/msl-fortune/fortune/
 
 ## 🌐 在线访问
 
 部署后可通过以下地址访问：
-`https://你的用户名.github.io/msl-website`
+`https://longlin2026.github.io/msl-website`
 
 ## 📁 网站结构
 
